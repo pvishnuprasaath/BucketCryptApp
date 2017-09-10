@@ -18,7 +18,7 @@ var dataRef = ref.child("secretdata");
 
 router.post('/rsa/enc',function(req,res){
     if (!req.body) return res.sendStatus(400)
-    var cipherText=rsa.encryptStringWithRsaPublicKey(req.body.text,'./helpers/cert/publicKey.PEM')
+    var cipherText=rsa.encryptStringWithRsaPublicKey(req.body.text,'../helpers/cert/publicKey.PEM')
     console.log(cipherText.toString())
     dataRef.push({
         text: req.body.text,
@@ -38,7 +38,7 @@ router.get('/rsa/dec',function(req,res){
         var data = snapshot.val();
         console.log(data);
         for(el in data){
-            data[el].cipher=rsa.decryptStringWithRsaPrivateKey(data[el].cipher,'./helpers/cert/privateKey.PEM')
+            data[el].cipher=rsa.decryptStringWithRsaPrivateKey(data[el].cipher,'../helpers/cert/privateKey.PEM')
            //result[key].push(data[el]); 
         }
         //console.log(JSON.stringify(result));
@@ -49,7 +49,7 @@ router.get('/rsa/dec',function(req,res){
 
 router.post('/rsa/dec',function(req,res){
     if (!req.body) return res.sendStatus(400)
-    var plainText=rsa.decryptStringWithRsaPrivateKey(req.body.cipher,'./helpers/cert/privateKey.PEM')
+    var plainText=rsa.decryptStringWithRsaPrivateKey(req.body.cipher,'../helpers/cert/privateKey.PEM')
     console.log(plainText)    
     res.send({
         Cipher: req.body.cipher,
