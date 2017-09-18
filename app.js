@@ -11,14 +11,10 @@ app.use(cors())
 app.use('/api',routes)
 app.use(express.static(path.join(__dirname,'public')))
 
-// app.get('/', function (req, res) {
-//     res.send(' Welcome to BucketCrypt '+ ciphertext) 
-// })
-
 app.get('*',function(req,res){
   res.redirect('/')
 })
 
-app.listen(process.env.PORT||8080, function () {
-  console.log('Server started at port 8080')
+app.listen(process.env.PORT||8000, function () {
+  console.log('Server started at port 8000')
 })
